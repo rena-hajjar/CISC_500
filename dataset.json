@@ -1,0 +1,11 @@
+{ 
+ "channel_names": {
+   "0": "ultrasound"
+ }, 
+ "labels": {
+   "background": 0,
+   "phantom": 1
+ }, 
+ "numTraining": 132, 
+ "file_ending": ".nii.gz"
+ }

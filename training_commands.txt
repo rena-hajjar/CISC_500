@@ -1,0 +1,11 @@
+nnUNetv2_train DATASET_NAME_OR_ID UNET_CONFIGURATION FOLD [additional options, see -h]
+
+UNET_CONFIGURATION=string that identifies the requested U-Net configuration (defaults: 2d, 3d_fullres, 3d_lowres, 3d_cascade_lowres).
+DATASET_NAME_OR_ID=what dataset should be trained on
+FOLD=which fold of the 5-fold-cross-validation is trained.
+
+nnU-Net stores a checkpoint every 50 epochs. If you need to continue a previous training, just add a --c to the training command.
+
+--val --npz -device cuda
+
+nnUNetv2_train 555 2d 0 -device cuda
