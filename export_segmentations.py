@@ -3,6 +3,8 @@ import slicer
 import SimpleITK as sitk
 import sitkUtils
 
+
+
 # === CONFIG ===
 sequence_name = "Sequence"       
 seg_sequence_name = "Sequence_2"    
