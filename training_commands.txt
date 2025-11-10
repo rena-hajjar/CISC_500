@@ -9,3 +9,23 @@ nnU-Net stores a checkpoint every 50 epochs. If you need to continue a previous 
 --val --npz -device cuda
 
 nnUNetv2_train 555 2d 0 -device cuda
+
+Prediction:
+export INPUT_FOLDER="C:\Users\Rena\Documents\BCS Cavity Scanning\USFrames2ForInference"
+export OUTPUT_FOLDER=r"C:\Users\Rena\Documents\BCS Cavity Scanning\Frames2InferenceResults"
+nnUNetv2_predict -i "$INPUT_FOLDER" -o "$OUTPUT_FOLDER" -d 555 -c 2d --device cuda
+
+nnUNetv2_predict -i 
+
+nnUNetv2_predict -i "$INPUT_FOLDER" -o "$OUTPUT_FOLDER" -d 555 -c 2d
+export INPUT_FOLDER="C:/Users/Rena/Documents/BCS Cavity Scanning/USFrames2ForInference"
+
+export OUTPUT_FOLDER="C:/Users/Rena/Documents/BCS Cavity Scanning/Frames2InferenceResults"
+
+export nnUNet_results="C:\\Users\\Rena\\Documents\\YEAR4\\CISC500\\CISC_500\\nnUNet_Data\\nnUNet_results"
+
+export nnUNet_preprocessed="C:\\Users\\Rena\\Documents\\YEAR4\\CISC500\\CISC_500\\nnUNet_Data\\nnUNet_preprocessed"
+
+export nnUNet_raw="C:\\Users\\Rena\\Documents\\YEAR4\\CISC500\\CISC_500\\nnUNet_Data\\nnUNet_raw"
+
+source ~/Documents/YEAR4/CISC500/CISC_500/.venv/Scripts/activate
