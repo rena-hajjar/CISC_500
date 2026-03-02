@@ -55,4 +55,3 @@ for i in range(132):
     # Clean up
     slicer.mrmlScene.RemoveNode(labelmap_node)
 
-print("✅ All frames and corresponding masks exported successfully!")
