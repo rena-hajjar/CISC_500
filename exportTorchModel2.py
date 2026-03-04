@@ -40,22 +40,51 @@ class nnUNetWrapper(nn.Module):
 wrapped = nnUNetWrapper(network)
 wrapped.eval()
 
-# Create a dummy input matching your model's expected input shape
-# For 2D nnUNet: (batch, channels, height, width)
-dummy_input = torch.randn(1, 1, 512, 768)  # adjust C, H, W to your data
+# # Create a dummy input matching your model's expected input shape
+# # For 2D nnUNet: (batch, channels, height, width)
+# dummy_input = torch.randn(1, 1, 512, 768)  # adjust C, H, W to your data
+# # 
+# # Try tracing first (usually works better than scripting for nnUNet)
+# with torch.no_grad():
+#     traced_model = torch.jit.trace(wrapped, dummy_input)
 
-# Try tracing first (usually works better than scripting for nnUNet)
+# # Validate it works
+# test_output = traced_model(dummy_input)
+# print("Output shape:", test_output.shape)
+
+# # Save
+# traced_model.save("my_nnunet_model.pt")
+# print("Saved TorchScript model!")
+
+# loaded = torch.jit.load("my_nnunet_model.pt")
+# loaded.eval()
+# out = loaded(dummy_input)
+# print("Verification output shape:", out.shape)
+
+import json
+
+# Your current setup
+dummy_input = torch.randn(1, 1, 512, 768)
+
 with torch.no_grad():
     traced_model = torch.jit.trace(wrapped, dummy_input)
 
-# Validate it works
 test_output = traced_model(dummy_input)
 print("Output shape:", test_output.shape)
 
-# Save
-traced_model.save("my_nnunet_model.pt")
-print("Saved TorchScript model!")
+# Create config with your model's expected shape
+config = {
+    "shape": [1, 1, 512, 768],  # [batch, channels, height, width]
+    "use_tracking_layer": False,
+    "tracking_method": "none"
+}
 
+# Save with config as extra files
+extra_files = {"config.json": json.dumps(config)}
+torch.jit.save(traced_model, "my_nnunet_model.pt", _extra_files=extra_files)
+print("Saved TorchScript model with config!")
+
+# Verification
 loaded = torch.jit.load("my_nnunet_model.pt")
 loaded.eval()
 out = loaded(dummy_input)
