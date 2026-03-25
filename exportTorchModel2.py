@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 from nnunetv2.inference.predict_from_raw_data import nnUNetPredictor
+import json
 
 # Load the nnUNet predictor
 predictor = nnUNetPredictor(
@@ -15,7 +16,7 @@ predictor = nnUNetPredictor(
 )
 
 predictor.initialize_from_trained_model_folder(
-    'nnUNet_Data/nnUNet_results/Dataset555/nnUNetTrainer__nnUNetPlans__2d',
+    r'nnUNet_Data\nnUNet_results\Dataset556\nnUNetTrainer__nnUNetPlans__2d',
     use_folds=(0,1, 2, 3, 4),  # or whichever fold(s) you trained
     checkpoint_name='checkpoint_final.pth',
 )
@@ -40,29 +41,6 @@ class nnUNetWrapper(nn.Module):
 wrapped = nnUNetWrapper(network)
 wrapped.eval()
 
-# # Create a dummy input matching your model's expected input shape
-# # For 2D nnUNet: (batch, channels, height, width)
-# dummy_input = torch.randn(1, 1, 512, 768)  # adjust C, H, W to your data
-# # 
-# # Try tracing first (usually works better than scripting for nnUNet)
-# with torch.no_grad():
-#     traced_model = torch.jit.trace(wrapped, dummy_input)
-
-# # Validate it works
-# test_output = traced_model(dummy_input)
-# print("Output shape:", test_output.shape)
-
-# # Save
-# traced_model.save("my_nnunet_model.pt")
-# print("Saved TorchScript model!")
-
-# loaded = torch.jit.load("my_nnunet_model.pt")
-# loaded.eval()
-# out = loaded(dummy_input)
-# print("Verification output shape:", out.shape)
-
-import json
-
 # Your current setup
 dummy_input = torch.randn(1, 1, 512, 768)
 
@@ -81,7 +59,7 @@ config = {
 
 # Save with config as extra files
 extra_files = {"config.json": json.dumps(config)}
-torch.jit.save(traced_model, "my_nnunet_model.pt", _extra_files=extra_files)
+torch.jit.save(traced_model, "nnunet_model2.pt", _extra_files=extra_files)
 print("Saved TorchScript model with config!")
 
 # Verification
