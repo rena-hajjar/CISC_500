@@ -8,10 +8,10 @@ import os
 import cv2
 
 
-sequence_node = slicer.util.getNode("Sequence_9")
-segmentation_node = slicer.util.getNode("Sequence_11")
-output_img_dir = r"C:\Users\Rena\Documents\BCS Cavity Scanning\UltraSAM\CavitySweep3\images"
-output_mask_dir = r"C:\Users\Rena\Documents\BCS Cavity Scanning\UltraSAM\CavitySweep3\masks"
+sequence_node = slicer.util.getNode("")
+segmentation_node = slicer.util.getNode("")
+output_img_dir = r"C:\Users\Rena\Documents\BCS Cavity Scanning\UltraSAM\~\images"
+output_mask_dir = r"C:\Users\Rena\Documents\BCS Cavity Scanning\UltraSAM\~\masks"
 
 os.makedirs(output_img_dir, exist_ok=True)
 os.makedirs(output_mask_dir, exist_ok=True)
@@ -20,9 +20,9 @@ n_frames = sequence_node.GetNumberOfDataNodes()
 print(f"Found {n_frames} frames.")
 
 start_frame = 0
-end_frame= 74
+end_frame= 0
 
-browserNode = slicer.util.getNode("Cavity3Sweep")
+browserNode = slicer.util.getNode("~")
 # for i in range(n_frames):
 for i in range(start_frame, end_frame + 1):
     browserNode.SetSelectedItemNumber(i)
