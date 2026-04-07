@@ -1,5 +1,3 @@
-
-
 import slicer
 import SimpleITK as sitk
 import sitkUtils
@@ -8,6 +6,7 @@ import os
 import cv2
 
 
+# Replace these based on Slicer sequence nodes and output specifications
 sequence_node = slicer.util.getNode("")
 segmentation_node = slicer.util.getNode("")
 output_img_dir = r"C:\Users\Rena\Documents\BCS Cavity Scanning\UltraSAM\~\images"
@@ -23,7 +22,6 @@ start_frame = 0
 end_frame= 0
 
 browserNode = slicer.util.getNode("~")
-# for i in range(n_frames):
 for i in range(start_frame, end_frame + 1):
     browserNode.SetSelectedItemNumber(i)
     vol_node = sequence_node.GetNthDataNode(i)
